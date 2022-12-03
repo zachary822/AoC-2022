@@ -29,8 +29,8 @@ scoreResult X = 0
 scoreResult Y = 3
 scoreResult Z = 6
 
-parseHand :: [String] -> (Hand, Result)
-parseHand (a : b : _) = (read a, read b)
+parseHand :: (String, String) -> (Hand, Result)
+parseHand (a, b) = (read a, read b)
 
 getHand :: Hand -> Result -> Hand
 getHand A X = C
@@ -47,6 +47,5 @@ score a b = scoreHand a + scoreResult b
 main :: IO ()
 main = do
     text <- getArgFile
-    let games = map parseHand $ map (map T.unpack . T.splitOn " ") $ filter ((== 3) . T.length) $ T.splitOn "\n" text
-
+    let games = map (parseHand . break (== ' ') . T.unpack) $ filter (not . T.null) $ T.splitOn "\n" text
     print $ sum $ map (\(a, b) -> score (getHand a b) b) games

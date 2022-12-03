@@ -12,6 +12,6 @@ main = do
     text <- getArgFile
 
     let elf = T.splitOn "\n\n" text
-    let elfCals = [sum (map (read . T.unpack :: T.Text -> Int) $ filter (not . T.null) $ T.splitOn "\n" e) | e <- elf]
+    let elfCals = [sum $ map (read . T.unpack :: T.Text -> Int) . filter (not . T.null) $ T.splitOn "\n" e | e <- elf]
 
     print $ sum $ take 3 $ sortBy (comparing Down) elfCals
