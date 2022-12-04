@@ -96,3 +96,13 @@ executable day3
     hs-source-dirs:   app,
                       Day3
     default-language: GHC2021
+
+executable day4
+    import:           warnings
+    main-is:          Main.hs
+    other-modules:    Lib.Utils
+    build-depends:    base ^>=4.17.0.0,
+                      text
+    hs-source-dirs:   app,
+                      Day4
+    default-language: GHC2021
